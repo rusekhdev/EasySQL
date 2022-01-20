@@ -31,7 +31,7 @@ public abstract class DataManager {
     
     private final DatabaseConnector connector;
     private final String tableName;
-    private SQLColumn[] columns;
+    private final SQLColumn[] columns;
     
     protected DataManager(DatabaseConnector connector, String tableName)
     {
@@ -120,7 +120,7 @@ public abstract class DataManager {
     
     public final SQLColumn[] getColumns()
     {
-        return (SQLColumn[])columns.clone();
+        return columns.clone();
     }
     
     protected final Connection getConnection()
@@ -154,12 +154,12 @@ public abstract class DataManager {
     @FunctionalInterface
     public interface ResultsConsumer
     {
-        public void consume(ResultSet results) throws SQLException;
+        void consume(ResultSet results) throws SQLException;
     }
     
     @FunctionalInterface
     public interface ResultsFunction<T>
     {
-        public T apply(ResultSet results) throws SQLException;
+        T apply(ResultSet results) throws SQLException;
     }
 }
